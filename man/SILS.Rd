@@ -2,7 +2,7 @@
 % Please edit documentation in R/SILS.R
 \name{SILS}
 \alias{SILS}
-\title{Silhouette for sorting}
+\title{Quality Index of Silhouette for Sorting}
 \usage{
 SILS(matrix_evaluation, data_criteria, k, SILS_plot = FALSE)
 }
@@ -31,9 +31,9 @@ horizontal control limits.
 }
 }
 \description{
-This function calculates a silhouette quality index based on PROMETHEE II net
-flows to evaluate the classifications of alternatives that were obtained
-with PROMETHEE-based ordered sorting methods.
+This function computes a quality index for \code{SILS} (Silhouette for Sorting),
+which relies on PROMETHEE II net flows to assess the classifications produced
+by PROMETHEE-based ordered sorting methods.
 }
 \details{
 \itemize{

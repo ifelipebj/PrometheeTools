@@ -2,7 +2,7 @@
 % Please edit documentation in R/PROMETHEEII.R
 \name{PROMETHEEII}
 \alias{PROMETHEEII}
-\title{PROMETHEE I and II}
+\title{PROMETHEE Outranking Method}
 \usage{
 PROMETHEEII(matrix_evaluation, data_criteria)
 }

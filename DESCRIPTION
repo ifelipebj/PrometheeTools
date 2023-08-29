@@ -1,14 +1,14 @@
 Package: PrometheeTools
-Title: PROMETHEE for Ranking and Sorting Application
+Title: PROMETHEE for Ranking and Sorting Applications
 Version: 0.0.0.9000
 Authors@R: c( 
-    person("Felipe", "Barrera", , "ifelipebj@hotmail.com", role = c("aut", "cre", "cph"),
+    person("Felipe", "Barrera", , "ifelipebj@hotmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-3236-6966")),
     person("Marina", "Segura", , "marina.segura@ucm.es", role = "aut",
            comment = c(ORCID = "0000-0002-6068-960X")),
     person("Concepcion", "Maroto", , "cmaroto@eio.upv.es", role = "aut",
            comment = c(ORCID = "0000-0001-8512-3197")))
-Description: Functions based on the PROMETHEE (Preference Ranking Organisation  METHod for Enrichment of Evaluations) multicriteria decision-making method. These functions allow to evaluate a large number of alternatives to obtain  partial rankings, total rankings, and sorting in ordered categories. Also  included is a function to measure the quality of classifications of alternatives based on sorting methods.  
+Description: Functions based on PROMETHEE (Preference Ranking Organisation METHod for Enrichment of Evaluations), a multicriteria decision-making method,to evaluate a large number of alternatives to obtain  partial and total rankings, and classifications in ordered categories. Includes a function to measure classification quality based on sorting methods.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

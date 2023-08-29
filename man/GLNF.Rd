@@ -2,7 +2,7 @@
 % Please edit documentation in R/GLNF.R
 \name{GLNF}
 \alias{GLNF}
-\title{Global Local Net Flow Sorting}
+\title{Global and Local Searches for Net Flows to sort}
 \usage{
 GLNF(matrix_evaluation, data_criteria)
 }

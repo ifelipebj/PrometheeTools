@@ -1,4 +1,4 @@
-#' PROMETHEE I and II
+#' PROMETHEE Outranking Method
 #'
 #'PROMETHEE is a multicriteria method that quantifies preference relationships
 #'and obtains net flows, generating a ranking that reflects the decision-maker's

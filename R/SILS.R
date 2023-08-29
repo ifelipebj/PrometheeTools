@@ -1,8 +1,8 @@
-#' Silhouette for sorting
+#' Quality Index of Silhouette for Sorting
 #'
-#' This function calculates a silhouette quality index based on PROMETHEE II net
-#' flows to evaluate the classifications of alternatives that were obtained
-#' with PROMETHEE-based ordered sorting methods.
+#' This function computes a quality index for `SILS` (Silhouette for Sorting),
+#' which relies on PROMETHEE II net flows to assess the classifications produced
+#' by PROMETHEE-based ordered sorting methods.
 #' @param matrix_evaluation Matrix encompassing the values of the alternatives
 #' according to various criteria and classification. The rows represent the
 #' alternatives and the limiting profiles, the columns correspond to the

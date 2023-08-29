@@ -1,4 +1,4 @@
-#' Global Local Net Flow Sorting
+#'Global and Local Searches for Net Flows to sort
 #'
 #'This function applies the GLNF Sorting (Global Local Net Flow Sorting)
 #'algorithm to sort the alternatives into groups ordered according to the
