@@ -103,7 +103,6 @@ data_criteria <- data.frame(
 ###############################
 RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 print(RS)
-print(RS$SILS_plot)
 #########
 }
 \references{
