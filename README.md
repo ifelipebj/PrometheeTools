@@ -6,11 +6,11 @@
 <!-- badges: end -->
 
 
-The goal of PrometheeTools is to  provide functions based on the PROMETHEE 
-(Preference Ranking Organisation  METHod for Enrichment of Evaluations) 
+The goal of PrometheeTools is to provide functions based on the PROMETHEE 
+(Preference Ranking Organisation METHod for Enrichment of Evaluations) 
 multicriteria decision-making method. These functions allow to evaluate a 
-large number of alternatives to obtain  partial rankings, total rankings, and 
-sorting in ordered categories. Also  included is a function to measure the 
+large number of alternatives to obtain partial rankings, total rankings, and 
+sorting in ordered categories. Also included is a function to measure the 
 quality of classifications of alternatives based on sorting methods.  
 
 ## Installation
@@ -68,7 +68,8 @@ SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 ```
 ## Format of Evaluation Matrix
 
-The evaluation matrix for the `matrix_evaluation` parameter should be structured as follows:
+The evaluation matrix for the `matrix_evaluation` parameter should be structured 
+as follows:
 
 | Alternatives     | Criterion 1 | Criterion 2 | Criterion 3 | ... |
 |------------------|-------------|-------------|-------------|-----|
@@ -100,7 +101,8 @@ Replace the placeholders with the actual names of your criteria and provide appr
 
 ## Format of Criteria Parameters Table
 
-The criteria parameters table for the `data_criteria` parameter should be structured as follows:
+The criteria parameters table for the `data_criteria` parameter should be 
+structured as follows:
 
 | Parameter        | Criterion 1 | Criterion 2 | Criterion 3 | ... |
 |-------------------|-------------|-------------|-------------|-----|
@@ -123,7 +125,7 @@ or minimize ("min").
 The preference and indifference thresholds depend on the type of function
 selected. The preference threshold is non-zero for alL functions except for
 "usual" and "u-shaped". The indifference threshold is non-zero for "linear",
-"level" and "u-shaped" functions
+"level" and "u-shaped" functions.
 
 Replace the placeholders with the actual names of your criteria and provide appropriate values for each parameter.
 
@@ -140,9 +142,8 @@ library(PrometheeTools)
 # sorting into four groups ordered by decision-maker preference (GLNF sorting).
 # Finally the silhouette quality index for sorting (`SILS`) is calculated.
 
-# The evaluation matrix is defined, where the rows correspond to the customers 
-# and the columns to the values for each criterion.In addition, five limiting 
-# profiles are included (r1, r2, ..., r5) that define the four categories.
+# The evaluation matrix is defined, five limiting profiles are included (r1, r2, 
+# r3, r4, r5) that define the four categories.
 
 #############
 
@@ -174,8 +175,7 @@ Financial_score = c(66, 58, 83, 68, 68, 69, 77, 55, 77, 53,
             4, 5, 1, 4, 2, 1, 5, 1, 1, 2,
             5, 4, 3, 2, 1))
   
-# The matrix with the criteria parameters is defined each row represents a 
-# parameter and the columns represent the criteria.
+# The matrix with the criteria parameters is defined
   
   data_criteria <- data.frame(
   Parameter = c("Function Type", "Indifference Threshold",
@@ -188,18 +188,18 @@ Financial_score = c(66, 58, 83, 68, 68, 69, 77, 55, 77, 53,
 
 ############# 
 
-# The `PROMETHEEII` function is applied with the 2 matrices as input parameters.
+# The `PROMETHEEII` function is applied
 RS <- PROMETHEEII(matrix_evaluation, data_criteria)
-# Positive flows, negative flows and net flows are calculated
+# Positive flows, negative flows and net flows
 RS$NF
-# Net flows by criteria are calculated.
+# Net flows by criteria
 RS$NFC
 
 #############
 
-# The`GLNF`function is applied with the 2 matrices as input parameters.
+# The`GLNF`function is applied
 RS <- GLNF(matrix_evaluation, data_criteria)
-# Calculate the final classification of the 30 customers into four ordered groups
+# Final classification of the 30 customers into four ordered groups
 RS$Class
 # It is possible to consult the details of global and local searches.
 # Show global classification results
@@ -222,11 +222,11 @@ matrix_evaluation$Category = c(3, 3, 1, 1, 4, 3, 2, 4, 1, 3,
 
 k <- 4
 
-# The function `SILS` is applied with the given input parameters, where 
-# `SILS_plot = TRUE` to plot the results of the silhouettes.
+# The function `SILS` is applied, where `SILS_plot = TRUE` to plot the results 
+# of the silhouettes.
 
 RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
-
+#Print silhouette values
 print(RS)
 
 ```
