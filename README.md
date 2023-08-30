@@ -72,12 +72,14 @@ SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 The evaluation matrix for the `matrix_evaluation` should be structured as 
 follows:
 
-| Alternative   | Criterion 1 | Criterion 2 | Criterion 3 | ... | Criterion m |
-|---------------|-------------|-------------|-------------|-----|-------------|
-| Alternative 1 |             |             |             |     |             |
-| Alternative 2 |             |             |             |     |             |
-| Alternative 3 |             |             |             |     |             |
-| ...           |             |             |             |     |             |
+| Alternative   | Criterion 1 | Criterion 2 | ... | Criterion j | ... | Criterion m |
+|---------------|-------------|-------------|-----|-------------|-----|-------------|
+| Alternative 1 |             |             |     |             |     |             |
+| Alternative 2 |             |             |     |             |     |             |
+| Alternative 3 |             |             |     |             |     |             |
+| ...           |             |             |     |             |     |             |
+| Alternative n |             |             |     |             |     |             |
+
 
 Where:
 - `Alternative` are the names or identifiers of the alternatives being 
@@ -107,13 +109,13 @@ appropriate values for each alternative-criterion combination.
 The criteria parameters table for the `data_criteria` should be structured as 
 follows:
 
-| Parameter              | Criterion 1 | Criterion 2 | Criterion 3 | ... | Criterion m |
-|------------------------|-------------|-------------|-------------|-----|-------------|
-| Function Type          |             |             |             |     |             |
-| Indifference Threshold |             |             |             |     |             |
-| Preference Threshold   |             |             |             |     |             |
-| Objective              |             |             |             |     |             |
-| Weight                 |             |             |             |     |             |
+| Parameter              | Criterion 1 | Criterion 2 | ... | Criterion j | ... | Criterion m |
+|------------------------|-------------|-------------|-----|-------------|-----|-------------|
+| Function Type          |             |             |     |             |     |             |
+| Indifference Threshold |             |             |     |             |     |             |
+| Preference Threshold   |             |             |     |             |     |             |
+| Objective              |             |             |     |             |     |             |
+| Weight                 |             |             |     |             |     |             |
 
 Where:
 - `Criterion 1`, `Criterion 2`, etc. are placeholders for the specific names of 
