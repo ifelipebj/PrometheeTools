@@ -68,10 +68,10 @@ SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 ```
 ## Format of Evaluation Matrix
 
-The evaluation matrix for the `matrix_evaluation` parameter should be structured 
-as follows:
+The evaluation matrix for the `matrix_evaluation` should be structured as 
+follows:
 
-| Alternatives     | Criterion 1 | Criterion 2 | Criterion 3 | ... |
+| Alternative     | Criterion 1 | Criterion 2 | Criterion 3 | ... |
 |------------------|-------------|-------------|-------------|-----|
 | Alternative 1    |             |             |             |     |
 | Alternative 2    |             |             |             |     |
@@ -79,7 +79,7 @@ as follows:
 | ...              |             |             |             |     |
 
 Where:
-- `Alternatives` are the names or identifiers of the alternatives being 
+- `Alternative` are the names or identifiers of the alternatives being 
 evaluated.
 - `Criterion 1`, `Criterion 2`, etc. are placeholders for the specific names of 
 your criteria.
@@ -101,8 +101,8 @@ Replace the placeholders with the actual names of your criteria and provide appr
 
 ## Format of Criteria Parameters Table
 
-The criteria parameters table for the `data_criteria` parameter should be 
-structured as follows:
+The criteria parameters table for the `data_criteria` should be structured as 
+follows:
 
 | Parameter        | Criterion 1 | Criterion 2 | Criterion 3 | ... |
 |-------------------|-------------|-------------|-------------|-----|
@@ -149,10 +149,10 @@ library(PrometheeTools)
 
 matrix_evaluation <- data.frame (
  
-Alternatives = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
-                 "r1", "r2", "r3", "r4", "r5"),
+Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+                "r1", "r2", "r3", "r4", "r5"),
 Monetary = c(21.52, 68.09, 184.94, 237.62, 14.29, 12.78, 91.53, 11.39, 264.79, 12.74,
              274.41, 3.75, 47.92, 34.5, 45.89, 39.92, 31.18, 273.23, 16.39, 3.91,
              20.09, 6.52, 26.62, 28.47, 7.57, 69.2, 420.95, 12.01, 85.88, 8.78,
