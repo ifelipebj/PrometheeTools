@@ -98,8 +98,8 @@ by the profile number. For a sorting into `k` groups, there should be `k+1`
 limiting profiles with R=(r1,r2,...,r`k+1`) being the set of limiting profiles.
 "r1" and "r2" represent the limiting profiles  for the first group (most
 preferred), and "r`k`" and "r`k+1`" denote the profiles for the `k`-th group 
-(least preferred). Finally the set of alternatives and profiles are added into 
-a new set Z = ((a1,a2,...,a_i,...,a_n,r1,r2,...,r`k+1`).
+(least preferred). Finally the set A and R are added into a new set of 
+alternatives Z = (a1,a2,...,a_n,r1,r2,...,r`k+1`).
 
 To implement `SILS` is this purpose,is necessary to add a new column (category) 
 at the end of the evaluation matrix with the classifications to be evaluated.
