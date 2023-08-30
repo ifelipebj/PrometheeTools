@@ -69,14 +69,16 @@ SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 ```
 ## Format of Evaluation Matrix
 
-The evaluation matrix for the `matrix_evaluation` should be structured as 
-follows:
+The evaluation matrix for the `evaluation_matrix` is formed by a set of alternatives
+A = (a1,a2,...,a_i,...,a_n) and a set of criteria G = (g1,g2,...,g_j,...,g_m), it must
+be structured as follows:
 
 | Alternative   | Criterion 1 | Criterion 2 | ... | Criterion j | ... | Criterion m |
 |---------------|-------------|-------------|-----|-------------|-----|-------------|
 | Alternative 1 |             |             |     |             |     |             |
 | Alternative 2 |             |             |     |             |     |             |
-| Alternative 3 |             |             |     |             |     |             |
+| ...           |             |             |     |             |     |             |
+| Alternative i |             |             |     |             |     |             |
 | ...           |             |             |     |             |     |             |
 | Alternative n |             |             |     |             |     |             |
 
@@ -93,9 +95,11 @@ The incorporation of limiting profiles that define the category in the
 `matrix_evaluation` is a crucial  step in to apply the `GLNF` and `SILS` 
 functions effectively. These profiles are denoted using the syntax "r" followed 
 by the profile number. For a sorting into `k` groups, there should be `k+1` 
-limiting profiles. Specifically, "r1" and "r2" represent the limiting profiles 
-for the first group (most preferred), and "r`k`" and "r`k+1`" denote the 
-profiles for the `k`-th group (least preferred).
+limiting profiles with R=(r1,r2,...,r`k+1`) being the set of limiting profiles.
+"r1" and "r2" represent the limiting profiles  for the first group (most
+preferred), and "r`k`" and "r`k+1`" denote the profiles for the `k`-th group 
+(least preferred). Finally the set of alternatives and profiles are added into 
+a new set Z = ((a1,a2,...,a_i,...,a_n,r1,r2,...,r`k+1`).
 
 To implement `SILS` is this purpose,is necessary to add a new column (category) 
 at the end of the evaluation matrix with the classifications to be evaluated.
@@ -106,8 +110,7 @@ appropriate values for each alternative-criterion combination.
 
 ## Format of Criteria Parameters Table
 
-The criteria parameters table for the `data_criteria` should be structured as 
-follows:
+The criteria parameters table for the `data_criteria` should be structured as follows:
 
 | Parameter              | Criterion 1 | Criterion 2 | ... | Criterion j | ... | Criterion m |
 |------------------------|-------------|-------------|-----|-------------|-----|-------------|
