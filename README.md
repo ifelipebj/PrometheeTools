@@ -30,11 +30,11 @@ devtools::install_github("ifelipebj/PrometheeTools")
 
 #### PROMETHEE Outranking Method
 
-PROMETHEE is a multicriteria method that quantifies preference relationships
-and obtains net flows, generating a ranking that reflects the decision-maker's
-preferences. This function applies PROMETHEE I (partial ranking) and
-PROMETHEE II (full ranking). This function can be used with a large number of
-alternatives.
+PROMETHEE is a multicriteria method that quantifies preference relationships and
+obtains the positive, negative and net flows of the alternatives, generating a
+rankings that reflect the decision-maker's preferences. This function applies
+PROMETHEE I (partial ranking) and PROMETHEE II (full ranking). This function can 
+be used with a large number of alternatives.
 
 Usage:
 
@@ -44,10 +44,10 @@ PROMETHEEII(matrix_evaluation, data_criteria)
 #### Global and Local Searches for Net Flows to Sort
 
 This function applies the GLNF Sorting (Global Local Net Flow Sorting)
-algorithm to sort the alternatives into groups ordered according to the
-decision-maker's preferences for multiple criteria. GLNF sorting is based
-on PROMETHEE net flows and a set of limiting profiles. This algorithm starts
-from a global classification (global search) that is enhanced by two
+algorithm to classify the alternatives into ordered groups according to the
+decision-maker's preferences in multiple criteria context. GLNF sorting is
+based on PROMETHEE net flows and a set of limiting profiles. This algorithm
+starts from a global classification (global search) that is enhanced by two
 local searches, intra-categorical and inter-categorical.
 
 Usage:
@@ -120,7 +120,7 @@ your criteria.
 - `Preference Threshold` is the preference threshold for the criterion.
 - `Objective` specifies whether the criterion's objective is to maximize ("max") 
 or minimize ("min").
-- `Weight` represents the weight of the criterion in the analysis.The sum of the weights of all the criteria must be equal to 1.
+- `Weight` represents the weight of the criterion in the analysis.The sum of the weights of all criteria must be equal to 1.
 
 The preference and indifference thresholds depend on the type of function
 selected. The preference threshold is non-zero for alL functions except for

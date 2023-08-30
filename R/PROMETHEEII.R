@@ -1,10 +1,10 @@
 #' PROMETHEE Outranking Method
 #'
 #'PROMETHEE is a multicriteria method that quantifies preference relationships
-#'and obtains net flows, generating a ranking that reflects the decision-maker's
-#'preferences. This function applies PROMETHEE I (partial ranking) and
-#'PROMETHEE II (full ranking). This function can be used with a large number of
-#'alternatives.
+#''and obtains the positive, negative and net flows of the alternatives,
+#'generating a rankings that reflect the decision-maker's preferences. This
+#'function applies PROMETHEE I (partial ranking) and PROMETHEE II (full ranking).
+#'This function can be used with a large number of alternatives.
 #'
 #' @param matrix_evaluation A matrix that encompasses the values of the
 #' alternatives across various criteria, with the rows representing the

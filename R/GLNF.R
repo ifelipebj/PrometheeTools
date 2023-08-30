@@ -1,55 +1,55 @@
 #'Global and Local Searches for Net Flows to Sort
 #'
 #'This function applies the GLNF Sorting (Global Local Net Flow Sorting)
-#'algorithm to sort the alternatives into groups ordered according to the
-#'decision-maker's preferences for multiple criteria. GLNF sorting is based
-#'on PROMETHEE net flows and a set of limiting profiles. This algorithm starts
-#'from a global classification (global search) that is enhanced by two
+#'algorithm to classify the alternatives into ordered groups according to the
+#'decision-maker's preferences in multiple criteria context. GLNF sorting is
+#'based on PROMETHEE net flows and a set of limiting profiles. This algorithm
+#'starts from a global classification (global search) that is enhanced by two
 #'local searches, intra-categorical and inter-categorical.
 #' @usage
 #' GLNF(matrix_evaluation, data_criteria)
-#' @param matrix_evaluation A matrix that encompasses the values of the
-#' alternatives across various criteria, with the rows representing the
-#' alternatives and limiting profiles, while the columns correspond to the
-#' evaluation criteria.
-#' @param data_criteria A matrix with the parameter information (rows) for each
-#' criterion (columns). The parameters rows are in the following order: Function
-#' Type, Indifference Threshold, Preference Threshold, Objective and Weight.
+#' @param matrix_evaluation Matrix with the values for all the alternatives and
+#' limiting profiles are row and columns correspond to the evaluation criteria.
+#' @param data_criteria Matrix with the parameter information (rows) for each
+#' criterion (columns). The rows of parameters are in the following order:
+#' Function Type, Indifference Threshold, Preference Threshold, Objective and
+#' Weight.
 #' @references
 #' Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method
 #' based on global and local search for supplier segmentation. International
 #' Transactions in Operational Research. Online https://doi.org/10.1111/itor.13288
 #' @return
-#' -`Global` A matrix with the results of the global search where the positive
-#' flow, the negative flow, the net flow and its preclassification are defined
-#' for each alternative.
+#' -`Global` Matrix with the results of the global search where positive,
+#' negative and net flow, and its preclassification are defined for each
+#' alternative.
 #'
-#' -`Local1` Matrices with the results of the first local search, where the
-#' alternatives are separated according to their sign from the net flows
-#' obtained after applying PROMETHEE to each group formed in the global search.
+#' -`Local1` Matrices with the results of the first local search. PROMETHEE is
+#' applied to each group obtained in the global search. The alternatives are
+#' divided according to their positive or negative sign from the net flows
+#' obtained from PROMETHEE.
 #'
-#' -`Local2` Matrices with the results of the second local search, where where
-#' the alternatives are separated according to their sign from net flows are
-#' obtained after applying PROMETHEE between each pair of categories.
+#' -`Local2` Matrices with the results of the second local search, where the
+#' alternatives are divided according to their sign from net flows are obtained
+#' after applying PROMETHEE between each pair of neighbour categories.
 #'
-#' -`Class` Final classification results.
+#' -`Class` Final classification of the alternatives results.
 #' @export
 #' @seealso \code{\link{PROMETHEEII}}
 #' @details
 #' - The Limiting Profiles should be presented as rows in the matrix_evaluation.
 #' The name must start with the letter "r" followed by the profile number
 #' (e.g., "r1", "r2").
-#' - For a total of k categories, there should be k + 1 limiting profiles.
-#'  Where to create k groups the set of limit profiles "r1 preferred to r2,...,
-#'  preferred to r(k+1)" is defined.
-#' - The preference function types are as follows: "linear", "v-shape", "usual",
-#' "u-shape", "level" and "gaussian".
+#' - For k categories, there should be k + 1 limiting profiles. To create k
+#' groups the set of limit profiles are defined, where r1 is preferred to
+#' r2,...,preferred to r(k+1).
+#' - The types of preference function are as follows: "linear", "v-shape",
+#' "usual", "u-shape", "level" and "gaussian".
 #' - The preference and indifference thresholds depend on the type of function
 #' selected. The preference threshold requires definition (is non-zero) for all
 #' functions except for "usual" and "u-shaped". The indifference threshold is
 #' non-zero for "linear", "level" and "u-shaped" functions.
-#' - In the objective criterion write "max" to maximize or "min" to minimize.
-#' - The sum of the weights of all the criteria must be equal to 1.
+#' - In the objective write "max" to maximize or "min" to minimize.
+#' - The sum of the weights of all criteria must be equal to 1.
 #' @examples
 #'matrix_evaluation <- data.frame (
 #'
@@ -104,7 +104,7 @@ GLNF <- function(matrix_evaluation, data_criteria) {
   phi_prof <- lim_prof$Phi
   data <- data[!grepl("^r\\d+", data$Alternative), ]
   data$Category <- NA
-  # Assign categories according to Phi
+  # Assigning categories according to Phi
   for (i in 1:(num_categories)) {
     lim_sup <- phi_prof[i]
     lim_inf <- phi_prof[i + 1]
@@ -116,7 +116,7 @@ GLNF <- function(matrix_evaluation, data_criteria) {
   Global_Search <- data
   lim_prof$Category <- NA
   Global_Search <- rbind(Global_Search, lim_prof)
-  #create subarrays for each group according to the global search
+  # Creating subarrays for each group according to the global search
   Global_Search_categories <- list()
   for (i in 1:(num_categories)){
     Alt_category <- data[data$Category == i, ]
@@ -126,13 +126,13 @@ GLNF <- function(matrix_evaluation, data_criteria) {
     category_matrix <- matrix_evaluation[matrix_evaluation$Alternative %in% ids_category, ]
     Global_Search_categories[[paste0("C", i)]] <- category_matrix
   }
-  #Step 3. Local search number 1
+  # Step 3. Local search 1
   Local1_categories <- list()
   for (i in seq_along(Global_Search_categories)) {
     matrix_name <- names(Global_Search_categories[i])
     ME <- matrix_evaluation
     matrix_evaluation <- Global_Search_categories[[i]]
-    #PROMETHEE
+    # PROMETHEE
     RS <- PROMETHEEII(matrix_evaluation, data_criteria)
     data <- as.data.frame(RS[[1]])
     data$Phi <- as.numeric(data$Phi)
@@ -143,7 +143,7 @@ GLNF <- function(matrix_evaluation, data_criteria) {
     Local1_categories[[paste0("LocalSearch1 ", matrix_name, "(-)")]] <- local_neg
     matrix_evaluation <- ME
   }
-  #Step 4. Local search number 2
+  # Step 4. Local search 2
   Local2_categories <- list()
   for (i in 1:(num_categories - 1)) {
     category_higher <- paste0("LocalSearch1 C", i, "(-)")
@@ -165,7 +165,7 @@ GLNF <- function(matrix_evaluation, data_criteria) {
     Local2_categories[[paste0("LocalSearch2 C", i, "- & C", i + 1, "+ (-)")]] <- local_neg
     matrix_evaluation <- ME
   }
-  #Step 5. Final classification
+  # Step 5. Final classification
   Classifica <- data.frame(Alternative = matrix_evaluation$Alternative, Category = NA)
   # Classification: C1, Ck, and other groups.
   for (i in seq_along(Global_Search_categories)) {
