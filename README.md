@@ -14,7 +14,8 @@ sorting in ordered categories. Also included is a function to measure the
 quality of classifications of alternatives based on sorting methods.  
 
 ## Installation
-You can install the released version of PrometheeTools from [CRAN](https://CRAN.R-project.org/package=PrometheeTools) with:
+You can install the released version of PrometheeTools from
+[CRAN](https://CRAN.R-project.org/package=PrometheeTools) with:
 
 ```r
 install.packages("PrometheeTools")
@@ -71,12 +72,12 @@ SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 The evaluation matrix for the `matrix_evaluation` should be structured as 
 follows:
 
-| Alternative     | Criterion 1 | Criterion 2 | Criterion 3 | ... |
-|------------------|-------------|-------------|-------------|-----|
-| Alternative 1    |             |             |             |     |
-| Alternative 2    |             |             |             |     |
-| Alternative 3    |             |             |             |     |
-| ...              |             |             |             |     |
+| Alternative   | Criterion 1 | Criterion 2 | Criterion 3 | ... | Criterion m |
+|---------------|-------------|-------------|-------------|-----|-------------|
+| Alternative 1 |             |             |             |     |             |
+| Alternative 2 |             |             |             |     |             |
+| Alternative 3 |             |             |             |     |             |
+| ...           |             |             |             |     |             |
 
 Where:
 - `Alternative` are the names or identifiers of the alternatives being 
@@ -86,7 +87,8 @@ your criteria.
 - Each cell in the matrix represents the value of the corresponding alternative 
 for a specific criterion.
 
-The incorporation of limiting profiles that define the category in the `matrix_evaluation` is a crucial  step in to apply the `GLNF` and `SILS` 
+The incorporation of limiting profiles that define the category in the
+`matrix_evaluation` is a crucial  step in to apply the `GLNF` and `SILS` 
 functions effectively. These profiles are denoted using the syntax "r" followed 
 by the profile number. For a sorting into `k` groups, there should be `k+1` 
 limiting profiles. Specifically, "r1" and "r2" represent the limiting profiles 
@@ -96,7 +98,8 @@ profiles for the `k`-th group (least preferred).
 To implement `SILS` is this purpose,is necessary to add a new column (category) 
 at the end of the evaluation matrix with the classifications to be evaluated.
 
-Replace the placeholders with the actual names of your criteria and provide appropriate values for each alternative-criterion combination.
+Replace the placeholders with the actual names of your criteria and provide
+appropriate values for each alternative-criterion combination.
 
 
 ## Format of Criteria Parameters Table
@@ -104,30 +107,33 @@ Replace the placeholders with the actual names of your criteria and provide appr
 The criteria parameters table for the `data_criteria` should be structured as 
 follows:
 
-| Parameter        | Criterion 1 | Criterion 2 | Criterion 3 | ... |
-|-------------------|-------------|-------------|-------------|-----|
-| Function Type     |             |             |             |     |
-| Indifference Threshold|           |             |             |     |
-| Preference Threshold  |           |             |             |     |
-| Objective         |             |             |             |     |
-| Weight            |             |             |             |     |
+| Parameter              | Criterion 1 | Criterion 2 | Criterion 3 | ... | Criterion m |
+|------------------------|-------------|-------------|-------------|-----|-------------|
+| Function Type          |             |             |             |     |             |
+| Indifference Threshold |             |             |             |     |             |
+| Preference Threshold   |             |             |             |     |             |
+| Objective              |             |             |             |     |             |
+| Weight                 |             |             |             |     |             |
 
 Where:
 - `Criterion 1`, `Criterion 2`, etc. are placeholders for the specific names of 
 your criteria. 
-- `Function Type` specifies the type of function for the criterion ("linear", "v-shape", "usual","u-shape", "level" and "gaussian").
+- `Function Type` specifies the type of function for the criterion ("linear",
+"v-shape", "usual","u-shape", "level" and "gaussian").
 - `Indifference Threshold` is the indifference threshold for the criterion.
 - `Preference Threshold` is the preference threshold for the criterion.
 - `Objective` specifies whether the criterion's objective is to maximize ("max") 
 or minimize ("min").
-- `Weight` represents the weight of the criterion in the analysis.The sum of the weights of all criteria must be equal to 1.
+- `Weight` represents the weight of the criterion in the analysis.The sum of the
+weights of all criteria must be equal to 1.
 
 The preference and indifference thresholds depend on the type of function
 selected. The preference threshold is non-zero for alL functions except for
 "usual" and "u-shaped". The indifference threshold is non-zero for "linear",
 "level" and "u-shaped" functions.
 
-Replace the placeholders with the actual names of your criteria and provide appropriate values for each parameter.
+Replace the placeholders with the actual names of your criteria and provide
+appropriate values for each parameter.
 
 
 ## Example
