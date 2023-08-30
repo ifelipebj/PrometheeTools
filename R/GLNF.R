@@ -1,4 +1,4 @@
-#'Global and Local Searches for Net Flows to sort
+#'Global and Local Searches for Net Flows to Sort
 #'
 #'This function applies the GLNF Sorting (Global Local Net Flow Sorting)
 #'algorithm to sort the alternatives into groups ordered according to the
@@ -39,7 +39,7 @@
 #' - The Limiting Profiles should be presented as rows in the matrix_evaluation.
 #' The name must start with the letter "r" followed by the profile number
 #' (e.g., "r1", "r2").
-#' - For a total of "n" categories, there should be "n + 1" limiting profiles.
+#' - For a total of k categories, there should be k + 1 limiting profiles.
 #'  Where to create k groups the set of limit profiles "r1 preferred to r2,...,
 #'  preferred to r(k+1)" is defined.
 #' - The preference function types are as follows: "linear", "v-shape", "usual",
