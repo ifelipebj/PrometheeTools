@@ -6,12 +6,12 @@
 <!-- badges: end -->
 
 
-The goal of PrometheeTools is to provide functions based on the PROMETHEE 
-(Preference Ranking Organisation METHod for Enrichment of Evaluations) 
-multicriteria decision-making method. These functions allow to evaluate a 
-large number of alternatives to obtain partial rankings, total rankings, and 
-sorting in ordered categories. Also included is a function to measure the 
-quality of classifications of alternatives based on sorting methods.  
+The goal of PrometheeTools is to provide PROMETHEE (Preference Ranking Organisation
+METHod for Enrichment of Evaluations), a multicriteria decision-making method, to
+handle a large number of alternatives to obtain partial and complete rankings.
+Moreover, the package provides the GLNF (Global Local Net Flow) sorting algorithm to
+classify alternatives into ordered categories and the SILS function to measure the
+classification quality based on sorting methods. 
 
 ## Installation
 You can install the released version of PrometheeTools from
@@ -32,10 +32,10 @@ devtools::install_github("ifelipebj/PrometheeTools")
 #### PROMETHEE Outranking Method
 
 PROMETHEE is a multicriteria method that quantifies preference relationships and
-obtains the positive, negative and net flows of the alternatives, generating a
+obtains the positive, negative and net flows of the alternatives, generating
 rankings that reflect the decision-maker's preferences. This function applies
-PROMETHEE I (partial ranking) and PROMETHEE II (full ranking). This function can 
-be used with a large number of alternatives.
+PROMETHEE I (partial ranking) and PROMETHEE II (complete ranking). This function 
+can handle  large number of alternatives.
 
 Usage:
 
@@ -67,7 +67,7 @@ Usage:
 ``` r
 SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 ```
-## Format of Evaluation Matrix
+## Evaluation matrix template
 
 The evaluation matrix for the `evaluation_matrix` is formed by a set of alternatives
 A = (a1,a2,...,a_i,...,a_n) and a set of criteria G = (g1,g2,...,g_j,...,g_m), it must
@@ -88,27 +88,29 @@ Where:
 evaluated.
 - `Criterion 1`, `Criterion 2`, etc. are placeholders for the specific names of 
 your criteria.
-- Each cell in the matrix represents the value of the corresponding alternative 
-for a specific criterion.
+- Each cell in the matrix represents the value of the corresponding criterion 
+for a specific alternative.
 
 The incorporation of limiting profiles that define the category in the
-`matrix_evaluation` is a crucial  step in to apply the `GLNF` and `SILS` 
-functions effectively. These profiles are denoted using the syntax "r" followed 
-by the profile number. For a sorting into `k` groups, there should be `k+1` 
+`matrix_evaluation` is a crucial step to apply the `GLNF` and `SILS` 
+functions. These profiles are denoted using the syntax "r" followed by the 
+profile number. For sorting into `k` groups, there should defined `k+1` 
 limiting profiles with R=(r1,r2,...,r`k+1`) being the set of limiting profiles.
-"r1" and "r2" represent the limiting profiles  for the first group (most
+"r1" and "r2" represent the limiting profiles for the first group (most
 preferred), and "r`k`" and "r`k+1`" denote the profiles for the `k`-th group 
-(least preferred). Finally the set A and R are added into a new set of 
+(least preferred). Finally, the set A and R are added into a new set of 
 alternatives Z = (a1,a2,...,a_n,r1,r2,...,r`k+1`).
 
-To implement `SILS` is this purpose,is necessary to add a new column (category) 
-at the end of the evaluation matrix with the classifications to be evaluated.
+To implement `SILS`,is necessary to add a new column `Category` at the end of 
+the `evaluation_matrix` with the classification in (the alternatives assignment to
+categories) to be evaluated. Write the classification in number format 
+(e.g.: 1,2,3,...,`k`).
 
 Replace the placeholders with the actual names of your criteria and provide
 appropriate values for each alternative-criterion combination.
 
 
-## Format of Criteria Parameters Table
+## Criteria parameters table template
 
 The criteria parameters table for the `data_criteria` should be structured as follows:
 
@@ -129,11 +131,11 @@ your criteria.
 - `Preference Threshold` is the preference threshold for the criterion.
 - `Objective` specifies whether the criterion's objective is to maximize ("max") 
 or minimize ("min").
-- `Weight` represents the weight of the criterion in the analysis.The sum of the
+- `Weight` represents the weight of the criterion in the analysis. The sum of the
 weights of all criteria must be equal to 1.
 
 The preference and indifference thresholds depend on the type of function
-selected. The preference threshold is non-zero for alL functions except for
+selected. The preference threshold is non-zero for all functions except for
 "usual" and "u-shaped". The indifference threshold is non-zero for "linear",
 "level" and "u-shaped" functions.
 
@@ -143,18 +145,18 @@ appropriate values for each parameter.
 
 ## Example
 
-This is an example which shows you how to solve a common problem:
+This is an example which shows you how to solve a ranking and sorting problem:
 
 ``` r
 # Load the PrometheeTools library
 library(PrometheeTools)
 # Example code corresponds to 30 customers to be evaluated with five 
-# criteria for partial sorting (PROMETHEE I), total sorting (PROMETHEE II) and 
-# sorting into four groups ordered by decision-maker preference (GLNF sorting).
+# criteria for partial ranking (PROMETHEE I), complete ranking (PROMETHEE II) and 
+# sorting into four groups ordered by decision-maker preferences (GLNF sorting).
 # Finally the silhouette quality index for sorting (`SILS`) is calculated.
 
-# The evaluation matrix is defined, five limiting profiles are included (r1, r2, 
-# r3, r4, r5) that define the four categories.
+# The evaluation matrix is defined, and five limiting profiles are included 
+# (r1,r2,r3,r4,r5) to define four categories.
 
 #############
 
@@ -208,11 +210,11 @@ RS$NFC
 
 #############
 
-# The`GLNF`function is applied
+# The `GLNF` function is applied
 RS <- GLNF(matrix_evaluation, data_criteria)
 # Final classification of the 30 customers into four ordered groups
 RS$Class
-# It is possible to consult the details of global and local searches.
+# It is possible to check the details of global and local searches.
 # Show global classification results
 RS$Global
 # Show local classification results
@@ -222,7 +224,8 @@ RS$Local2
 #############
 
 # Add the categories calculated with GLNF (or another method) to the last column 
-# of `matrix_evaluation`.
+# of `matrix_evaluation`. The limiting profiles have not been assigned to any
+# group.
 
 matrix_evaluation$Category = c(3, 3, 1, 1, 4, 3, 2, 4, 1, 3,
                                  1, 4, 2, 2, 2, 2, 2, 1, 3, 4,

@@ -6,9 +6,10 @@
 
 ### Package summary 
 
-* This package provides sorting tools based on PROMETHEE, which have been 
-  published in highly impactful indexed journals. 
+* This package includes PROMETHEE to handle a large number of alternatives, GLNF
+sorting algorithm to classify alternatives into ordered categories and SILS function to
+measure the classification quality, which has been published in a high-impact journal. 
 
-* The suggested functions can be used with a large number of alternatives, 
-  overcoming the limitations of the existing PROMETHEEI and II packages found in 
-  CRAN. This enhancement extends its utility to address practical challenges.
+* The developed functions can handle a large number of alternatives, overcoming the
+limitations of the existing PROMETHEEI and II packages found in CRAN. This proposal
+allows dealing with new and difficult challenges in multicriteria decision making.
