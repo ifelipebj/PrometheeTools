@@ -1,6 +1,6 @@
 Package: PrometheeTools
 Title: PROMETHEE and GLNF for Ranking and Sorting Problems
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c( 
     person("Felipe", "Barrera", , "ifelipebj@hotmail.com", role = c("aut", "cre", "cph"),
            comment = c(ORCID = "0000-0003-3236-6966")),
@@ -13,8 +13,8 @@ Description: PROMETHEE (Preference Ranking Organisation METHod for Enrichment of
     rankings. The package also provides the GLNF (Global Local Net Flow) sorting
     algorithm to classify alternatives into ordered categories, as well as an index
     function to measure the classification quality. Barrera, F., Segura, M., &
-    Maroto, C. (2023) <doi:10.1111/itor.13288>. Brans, J.P.; De Smet, 
-    Y., (2016) <doi:10.1007/978-1-4939-3094-4_6>.
+    Maroto, C. (2023) <doi:10.1111/itor.13288>. Brans, J.P.; De Smet, Y., (2016) 
+    <doi:10.1007/978-1-4939-3094-4_6>.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
