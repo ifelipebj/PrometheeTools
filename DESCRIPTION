@@ -8,7 +8,7 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-6068-960X")),
     person("Concepcion", "Maroto", , "cmaroto@eio.upv.es", role = "aut",
            comment = c(ORCID = "0000-0001-8512-3197")))
-Description: Multicriteria decision-making evaluations based on PROMETHEE (Preference Ranking Organisation METHod for Enrichment of Evaluations) method,to assess a large number of alternatives to obtain partial and complete rankings. Moreover, the package provides the GLNF (Global Local Net Flow) sorting algorithm to classify alternatives into ordered categories and quality index function to mesure the classification quality.
+Description: Multicriteria decision-making evaluations based on PROMETHEE (Preference Ranking Organisation METHod for Enrichment of Evaluations) method, to assess a large number of alternatives to obtain partial and complete rankings. Moreover, the package provides the GLNF (Global Local Net Flow) sorting algorithm to classify alternatives into ordered categories and quality index function to measure the classification quality.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
