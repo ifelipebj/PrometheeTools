@@ -8,8 +8,9 @@
 #'local searches, intra-categorical and inter-categorical.
 #' @usage
 #' GLNF(matrix_evaluation, data_criteria)
-#' @param matrix_evaluation Matrix with the values for all alternatives and
-#' limiting profiles are row and columns correspond to the evaluation criteria.
+#' @param matrix_evaluation The matrix includes the values for all alternatives.
+#' The alternatives and limiting profiles are row and columns correspond to
+#' the evaluation criteria.
 #' @param data_criteria Matrix with the parameter information (rows) for each
 #' criterion (columns). The rows of parameters are in the following order:
 #' Function Type, Indifference Threshold, Preference Threshold, Objective and

@@ -6,8 +6,8 @@
 #'function applies PROMETHEE I (partial ranking) and PROMETHEE II (full ranking).
 #'This function can handle a large number of alternatives.
 #'
-#' @param matrix_evaluation The matrix includes the values for all alternatives
-#' and limiting profiles are rows and columns correspond to the evaluation
+#' @param matrix_evaluation The matrix includes the values for all alternatives.
+#' The alternatives profiles are rows and columns correspond to the evaluation
 #' criteria.
 #' @param data_criteria Matrix with the parameter information (rows) for each
 #' criterion (columns). The rows of parameters are in the following order:
