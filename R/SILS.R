@@ -26,8 +26,8 @@
 #' obtain the classifications with PROMETHEE II.
 #' - The Limiting Profiles used must be presented as rows in the
 #' matrix_evaluation. The name must start with the letter "r" followed by the
-#' profile number (e.g., "r1", "r2"). For a total of "n" categories, there
-#' should be "n + 1" limiting profiles.
+#' profile number (e.g., "r1", "r2"). For a total of `k` categories, there
+#' should be `k + 1` limiting profiles.
 #' - The preference function types are as follows: "linear", "v-shape", "usual",
 #' "u-shape", "level" and "gaussian".
 #' - The preference and indifference thresholds depend on the type of function
@@ -103,7 +103,7 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
   RS <- PROMETHEEII(matrix_evaluation, data_criteria)
   data <- as.data.frame(RS[[1]])
   data$Phi <- as.numeric(data$Phi)
-  #prepare data for SILS
+  # Prepare data for SILS
   lim_prof <- data[grepl("^r\\d+", data$Alternative), ]
   lim_prof <- lim_prof[order(as.numeric(gsub("^r", "", lim_prof$Alternative))), ]
   r <- lim_prof$Phi
@@ -113,16 +113,16 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
   Category <- data$Category
   phi <- data$Phi
   Alternative <- data$Alternative
-  # define variable d_t
+  # Define variable d_t
   d_t <- 2 / ((k + 1) * 2)
-  # define Category centroids
+  # Define Category centroids
   centroids <- (r[-length(r)] + r[-1]) / 2
-  # create vectors for dissimilarities
+  # Create vectors for dissimilarities
   u <- rep(0, length(phi))
   l <- rep(0, length(phi))
   h <- rep(0, length(phi))
   SILS <- rep(0, length(phi))
-  #current group dissimilarity (u(i))
+  # Current group dissimilarity (u(i))
   for (i in seq_along(phi)){
     cat_i <- Category[i]
     phi_i <- phi[i]
@@ -133,7 +133,7 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
     dissicentro_k <- abs((phi_i - centroids[cat_i]))
     u[i] <- (dissim_i + dissicentro_k) / (num_alt_cat_i)
   }
-  #lower group dissimilarity (l(i))
+  # Lower group dissimilarity (l(i))
   for (i in seq_along(phi)) {
     cat_i <- Category[i]
     phi_i <- phi[i]
@@ -146,7 +146,7 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
       l[i] <- (dissim_i + dissicentro_k) / (num_alt_cat_i + 1)
     }
   }
-  #higger group dissimilarity (h(i))
+  # Higger group dissimilarity (h(i))
   for (i in seq_along(phi)){
     cat_i <- Category[i]
     phi_i <- phi[i]
@@ -159,12 +159,12 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
       h[i] <- (dissim_i + dissicentro_k) / (num_alt_cat_i + 1)
     }
   }
-  #silhouette calculation
+  # Silhouette calculation
   for (i in seq_along(phi)){
     SILS[i] <- (l[i] - u[i]) / max(l[i], u[i]) - (h[i] - u[i]) / max(h[i], u[i])
   }
   RS <- data.frame(Alternative, Category, SILS)
-  #Plop for silhouettes
+  # Plop for silhouettes
   if (SILS_plot) {
     ggplot2::ggplot()
     SILS_ggplot <- ggplot(RS, aes(x = Alternative, y = SILS, fill = ifelse(SILS > 0, "", ""))) +

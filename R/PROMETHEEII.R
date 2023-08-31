@@ -1,40 +1,40 @@
-#' PROMETHEE Outranking Method
+#'The PROMETHEE Outranking Method
 #'
 #'PROMETHEE is a multicriteria method that quantifies preference relationships
-#''and obtains the positive, negative and net flows of the alternatives,
-#'generating a rankings that reflect the decision-maker's preferences. This
+#'and obtains the positive, negative and net flows of the alternatives,
+#'generating rankings that reflect the decision-maker's preferences. This
 #'function applies PROMETHEE I (partial ranking) and PROMETHEE II (full ranking).
-#'This function can be used with a large number of alternatives.
+#'This function can handle a large number of alternatives.
 #'
-#' @param matrix_evaluation A matrix that encompasses the values of the
-#' alternatives across various criteria, with the rows representing the
-#' alternatives and the columns correspond to the evaluation criteria.
-#' @param data_criteria A matrix with the parameter information (rows) for each
-#' criterion (columns). The parameters rows are in the following order: Function
-#' Type, Indifference Threshold, Preference Threshold, Objective and Weight.
-
+#' @param matrix_evaluation The matrix includes the values for all alternatives
+#' and limiting profiles are rows and columns correspond to the evaluation
+#' criteria.
+#' @param data_criteria Matrix with the parameter information (rows) for each
+#' criterion (columns). The rows of parameters are in the following order:
+#' Function Type, Indifference Threshold, Preference Threshold, Objective and
+#' Weight.
 #' @return
-#' -`NF` A matrix with Positive and negative flows for preference
-#' relations (PROMETHEE I) and Net flows for total outranking (PROMETHEE II).
+#' -`NF` Matrix with positive and negative flows (PROMETHEE I) and net flows for
+#' complete ranking (PROMETHEE II).
 #'
-#' -`NFC` A Matrix of net flows by criterion.
+#' -`NFC` Net flows matrix by criterion.
 #' @references
 #' Brans, J.P.; De Smet, Y., (2016). PROMETHEE Methods. In: Multiple Criteria
 #' Decision Analysis. State of the Art Surveys, Figuera, J., Greco, S.,
 #' Ehrgott, M.; Springer: New York, USA, pp. 187-219. DOI: 10.1007/978-1-4939-3094-4_6.
 #' @export PROMETHEEII
 #' @details
-#' - The preference function types are as follows: "linear", "v-shape", "usual",
-#' "u-shape", "level" and "gaussian".
+#' - The types of preference function are as follows: "linear", "v-shape",
+#' "usual", "u-shape", "level" and "gaussian".
 #' - The preference and indifference thresholds depend on the type of function
-#' selected. The preference threshold is non-zero for alL functions except for
-#' "usual" and "u-shaped". The indifference threshold is non-zero for "linear",
-#' "level" and "u-shaped" functions.
-#' - In the objective criterion write "max" to maximize or "min" to minimize.
-#' - The sum of the weights of all the criteria must be equal to 1.
-#' - Compared to other implementations such as `promethee123` and `PROMETHEE`,
-#' this implementation of `PROMETHEEII` is designed to handle a larger number
-#' of alternatives (it has been tested with 10,000 alternatives).
+#' selected. The preference threshold requires definition (is non-zero) for all
+#' functions except for "usual" and "u-shaped". The indifference threshold is
+#' non-zero for "linear", "level" and "u-shaped" functions.
+#' - In the objective write "max" to maximize or "min" to minimize.
+#' - The sum of the weights of all criteria must be equal to 1.
+#' - This implementation of `PROMETHEEII` is designed to handle a large number
+#' of alternatives (it has been tested with 10,000 alternatives) much higher
+#' than the previous implementations in R (`promethee123` and `PROMETHEE`).
 #' @examples
 #'matrix_evaluation <- data.frame (
 #'
@@ -70,19 +70,19 @@
 #'RS$NF
 #'RS$NFC
 PROMETHEEII <- function(matrix_evaluation, data_criteria) {
-  #identify columns of criteria and alternative column
+  # Identify columns of criteria and alternative column
   criteria_name <- colnames(matrix_evaluation)[-1]
   Alt_name <- colnames(matrix_evaluation)[1]
-  # matrix initialization
+  # Matrix initialization
   Nf_posi <- matrix(0, nrow = nrow(matrix_evaluation), ncol = 1)
   Nf_nega <- matrix(0, nrow = nrow(matrix_evaluation), ncol = 1)
   Netflow_criteria <- matrix(0, nrow = nrow(matrix_evaluation), ncol = length(criteria_name))
   # Net flow for each criterion j
   for (j in seq_along(criteria_name)) {
-    # get the name of the criterion and its values
+    # Get the name of the criterion and its values
     criteria <- criteria_name[j]
     criteria_values <- matrix_evaluation[[criteria]]
-    # read criteria parameters
+    # Read criteria parameters
     Type <- data_criteria[1, criteria]
     Objetive <- data_criteria[4, criteria]
     Weight <- as.numeric(data_criteria[5, criteria])
@@ -103,20 +103,20 @@ PROMETHEEII <- function(matrix_evaluation, data_criteria) {
     }else if (Type == "gaussian") {
       preference <- ifelse(desvia > q, 1 - exp(-desvia^2 / (2 * p^2)), 0)
     }
-    # Calculate positive and negative flow
+    # Calculate positive and negative flows
     Flow_posi <- rowSums(preference) / (ncol(preference) - 1)
     Flow_nega <- colSums(preference) / (nrow(preference) - 1)
-    # Calculate net flow (Nf)
+    # Calculate net flows (Nf)
     Nf_cri <- (Flow_posi - Flow_nega)
     Nf_posi <- Nf_posi + (Flow_posi * Weight)
     Nf_nega <- Nf_nega + (Flow_nega * Weight)
-    # construct net flows matrix by criterion
+    # Construct net flows matrix by criterion
     Netflow_criteria <- cbind(Netflow_criteria, Nf_cri)
     Netflow_criteria <- Netflow_criteria[, -1]
   }
-  #netflow total
+  # Netflow
   Netflow <- Nf_posi - Nf_nega
-  # Add the names that correspond to the final matrices
+  # Add the names corresponding to the final matrices
   colnames(Netflow_criteria) <- criteria_name
   colnames(Netflow) <- paste("Phi")
   colnames(Nf_posi) <- paste("Phi+")
@@ -125,7 +125,7 @@ PROMETHEEII <- function(matrix_evaluation, data_criteria) {
   colnames(Netflow_criteria)[1] <- Alt_name
   Netflow <- cbind((matrix_evaluation[, 1]), Nf_posi, Nf_nega, Netflow)
   colnames(Netflow)[1] <- Alt_name
-  # Create a list of results (PR)
+  # Create the list of results
   RS <- list(
     NF = Netflow,
     NFC = Netflow_criteria
