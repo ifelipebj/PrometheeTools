@@ -59,9 +59,6 @@ non-zero for "linear", "level" and "u-shaped" functions.
 }
 }
 \examples{
-# The evaluation matrix is defined to classify 30 customers in four categories
-# according to five criteria. Five limiting profiles (r1,r2,r3,r4,r5) are
-# included in the rows as alternatives.
 matrix_evaluation <- data.frame (
 
 Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -88,8 +85,6 @@ Length = c(4, 3, 3, 2, 2, 2, 2, 3, 2, 4,
           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
           4, 5, 1, 4, 2, 1, 5, 1, 1, 2,
           5, 4, 3, 2, 1))
-
-# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
 Parameter = c("Function Type", "Indifference Threshold",
              "Preference Threshold","Objetive", "Weight"),
@@ -98,15 +93,9 @@ Monetary = c("linear", 30.00, 120, "max", 0.4),
 Recency = c("usual", 0.00, 0.00, "min", 0.1),
 Financial_score = c("linear", 0.00, 10, "max", 0.2),
 Length = c("usual", 0.00, 0.00, "max", 0.1))
-
-###############################
 RS <- GLNF(matrix_evaluation, data_criteria)
-# Final classification of the 30 customers into four ordered groups
 RS$Class
-# It is possible to check the details of global and local searches.
-# Show global classification results
 RS$Global
-# Show local classification results
 RS$Local1
 RS$Local2
 }

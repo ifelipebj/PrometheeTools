@@ -56,13 +56,7 @@ non-zero for "linear", "level" and "u-shaped" functions.
 }
 }
 \examples{
-# The number of categories or groups to be evaluated is defined.
 k <- 4
-
-# The evaluation matrix is defined to evaluate 30 clients who were classified
-# into four groups according to five criteria and five limiting profiles.
-# (r1,r2,r3,r4,r5). The last column contains the categories in numerical
-# format.
 matrix_evaluation <- data.frame (
 
 Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -93,7 +87,6 @@ Category = c(3, 3, 1, 1, 4, 3, 2, 4, 1, 3,
               1, 4, 2, 2, 2, 2, 2, 1, 3, 4,
               3, 3, 3, 2, 4, 2, 1, 4, 3, 4,
               NA, NA, NA, NA, NA))
-# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
  Parameter = c("Function Type", "Indifference Threshold",
                "Preference Threshold","Objetive", "Weight"),
@@ -102,8 +95,6 @@ data_criteria <- data.frame(
  Recency = c("usual", 0.00, 0.00, "min", 0.1),
  Financial_score = c("linear", 0.00, 10, "max", 0.2),
  Length = c("usual", 0.00, 0.00, "max", 0.1))
-
-###############################
 RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 print(RS)
 }

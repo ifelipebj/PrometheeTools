@@ -45,8 +45,6 @@ than the previous implementations in R (\code{promethee123} and \code{PROMETHEE}
 }
 }
 \examples{
-# The evaluation matrix is defined to rank 30 customers according to five
-# criteria.
 matrix_evaluation <- data.frame (
 
 Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -67,8 +65,6 @@ Financial_score = c(66, 58, 83, 68, 68, 69, 77, 55, 77, 53,
 Length = c(4, 3, 3, 2, 2, 2, 2, 3, 2, 4,
           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
           4, 5, 1, 4, 2, 1, 5, 1, 1, 2))
-
-# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
 Parameter = c("Function Type", "Indifference Threshold",
              "Preference Threshold","Objetive", "Weight"),
@@ -77,12 +73,8 @@ Monetary = c("linear", 30.00, 120, "max", 0.4),
 Recency = c("usual", 0.00, 0.00, "min", 0.1),
 Financial_score = c("linear", 0.00, 10, "max", 0.2),
 Length = c("usual", 0.00, 0.00, "max", 0.1))
-
-###############################
 RS <- PROMETHEEII(matrix_evaluation, data_criteria)
-# Positive flows, negative flows and net flows
 RS$NF
-# Net flows by criteria
 RS$NFC
 }
 \references{
