@@ -52,6 +52,9 @@
 #' - In the objective write "max" to maximize or "min" to minimize.
 #' - The sum of the weights of all criteria must be equal to 1.
 #' @examples
+#'# The evaluation matrix is defined to classify 30 customers in four categories
+#'# according to five criteria. Five limiting profiles (r1,r2,r3,r4,r5) are
+#'# included in the rows as alternatives.
 #'matrix_evaluation <- data.frame (
 #'
 #'Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -78,6 +81,8 @@
 #'           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
 #'           4, 5, 1, 4, 2, 1, 5, 1, 1, 2,
 #'           5, 4, 3, 2, 1))
+#'
+#'# The matrix with the criteria parameters is defined
 #'data_criteria <- data.frame(
 #'Parameter = c("Function Type", "Indifference Threshold",
 #'              "Preference Threshold","Objetive", "Weight"),
@@ -89,10 +94,14 @@
 #'
 #'###############################
 #'RS <- GLNF(matrix_evaluation, data_criteria)
+#'# Final classification of the 30 customers into four ordered groups
+#'RS$Class
+#'# It is possible to check the details of global and local searches.
+#'# Show global classification results
 #'RS$Global
+#'# Show local classification results
 #'RS$Local1
 #'RS$Local2
-#'RS$Class
 GLNF <- function(matrix_evaluation, data_criteria) {
   colnames(matrix_evaluation)[1] <- "Alternative"
   # Step2. Global search

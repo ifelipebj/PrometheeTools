@@ -2,51 +2,54 @@
 % Please edit documentation in R/PROMETHEEII.R
 \name{PROMETHEEII}
 \alias{PROMETHEEII}
-\title{PROMETHEE Outranking Method}
+\title{The PROMETHEE Outranking Method}
 \usage{
 PROMETHEEII(matrix_evaluation, data_criteria)
 }
 \arguments{
-\item{matrix_evaluation}{A matrix that encompasses the values of the
-alternatives across various criteria, with the rows representing the
-alternatives and the columns correspond to the evaluation criteria.}
+\item{matrix_evaluation}{The matrix includes the values for all alternatives.
+The alternatives profiles are rows and columns correspond to the evaluation
+criteria.}
 
-\item{data_criteria}{A matrix with the parameter information (rows) for each
-criterion (columns). The parameters rows are in the following order: Function
-Type, Indifference Threshold, Preference Threshold, Objective and Weight.}
+\item{data_criteria}{Matrix with the parameter information (rows) for each
+criterion (columns). The rows of parameters are in the following order:
+Function Type, Indifference Threshold, Preference Threshold, Objective and
+Weight.}
 }
 \value{
--\code{NF} A matrix with Positive and negative flows for preference
-relations (PROMETHEE I) and Net flows for total outranking (PROMETHEE II).
+-\code{NF} Matrix with positive and negative flows (PROMETHEE I) and net flows for
+complete ranking (PROMETHEE II).
 
--\code{NFC} A Matrix of net flows by criterion.
+-\code{NFC} Net flows matrix by criterion.
 }
 \description{
 PROMETHEE is a multicriteria method that quantifies preference relationships
-and obtains net flows, generating a ranking that reflects the decision-maker's
-preferences. This function applies PROMETHEE I (partial ranking) and
-PROMETHEE II (full ranking). This function can be used with a large number of
-alternatives.
+and obtains the positive, negative and net flows of the alternatives,
+generating rankings that reflect the decision-maker's preferences. This
+function applies PROMETHEE I (partial ranking) and PROMETHEE II (full ranking).
+This function can handle a large number of alternatives.
 }
 \details{
 \itemize{
-\item The preference function types are as follows: "linear", "v-shape", "usual",
-"u-shape", "level" and "gaussian".
+\item The types of preference function are as follows: "linear", "v-shape",
+"usual", "u-shape", "level" and "gaussian".
 \item The preference and indifference thresholds depend on the type of function
-selected. The preference threshold is non-zero for alL functions except for
-"usual" and "u-shaped". The indifference threshold is non-zero for "linear",
-"level" and "u-shaped" functions.
-\item In the objective criterion write "max" to maximize or "min" to minimize.
-\item The sum of the weights of all the criteria must be equal to 1.
-\item Compared to other implementations such as \code{promethee123} and \code{PROMETHEE},
-this implementation of \code{PROMETHEEII} is designed to handle a larger number
-of alternatives (it has been tested with 10,000 alternatives).
+selected. The preference threshold requires definition (is non-zero) for all
+functions except for "usual" and "u-shaped". The indifference threshold is
+non-zero for "linear", "level" and "u-shaped" functions.
+\item In the objective write "max" to maximize or "min" to minimize.
+\item The sum of the weights of all criteria must be equal to 1.
+\item This implementation of \code{PROMETHEEII} is designed to handle a large number
+of alternatives (it has been tested with 10,000 alternatives) much higher
+than the previous implementations in R (\code{promethee123} and \code{PROMETHEE}).
 }
 }
 \examples{
+# The evaluation matrix is defined to rank 30 customers according to five
+# criteria.
 matrix_evaluation <- data.frame (
 
-Alternatives = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30),
 Monetary = c(21.52, 68.09, 184.94, 237.62, 14.29, 12.78, 91.53, 11.39, 264.79,12.74,
@@ -64,6 +67,8 @@ Financial_score = c(66, 58, 83, 68, 68, 69, 77, 55, 77, 53,
 Length = c(4, 3, 3, 2, 2, 2, 2, 3, 2, 4,
           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
           4, 5, 1, 4, 2, 1, 5, 1, 1, 2))
+
+# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
 Parameter = c("Function Type", "Indifference Threshold",
              "Preference Threshold","Objetive", "Weight"),
@@ -75,7 +80,9 @@ Length = c("usual", 0.00, 0.00, "max", 0.1))
 
 ###############################
 RS <- PROMETHEEII(matrix_evaluation, data_criteria)
+# Positive flows, negative flows and net flows
 RS$NF
+# Net flows by criteria
 RS$NFC
 }
 \references{

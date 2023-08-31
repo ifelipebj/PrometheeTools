@@ -7,62 +7,65 @@
 SILS(matrix_evaluation, data_criteria, k, SILS_plot = FALSE)
 }
 \arguments{
-\item{matrix_evaluation}{Matrix encompassing the values of the alternatives
-according to various criteria and classification. The rows represent the
-alternatives and the limiting profiles, the columns correspond to the
-evaluation criteria, and last column the classifications.}
+\item{matrix_evaluation}{The matrix includes the values for all alternatives
+and limiting profiles are rows and columns correspond to the evaluation
+criteria. The last column indicates the alternative classification.}
 
-\item{data_criteria}{A matrix with the parameter information (rows) for each
-criterion (columns) used to obtain the classification to be evaluated. The
-parameters rows are in the following order: Function Type, Indifference
-Threshold, Preference Threshold, Objective and Weight.}
+\item{data_criteria}{Matrix with the parameter information (rows) for each
+criterion (columns). The rows of parameters are in the following order:
+Function Type, Indifference Threshold, Preference Threshold, Objective and
+Weight.}
 
 \item{k}{The number of categories to be evaluated.}
 
-\item{SILS_plot}{A boolean value indicating whether to generate a stacked bar
+\item{SILS_plot}{Boolean value indicating whether to generate a stacked bar
 chart representing the SILS values.}
 }
 \value{
 \itemize{
 \item A data frame with the SILS values for each alternative according to the
 classification entered.
-\item A stacked bar chart representing the SILS values for each alternative with
+\item Stacked bar chart representing the SILS values for each alternative with
 horizontal control limits.
 }
 }
 \description{
-This function computes a quality index for \code{SILS} (Silhouette for Sorting),
-which relies on PROMETHEE II net flows to assess the classifications produced
+This function computes the quality index for \code{SILS} (Silhouette for Sorting),
+which relies on PROMETHEE II net flows to assess the classifications generated
 by PROMETHEE-based ordered sorting methods.
 }
 \details{
 \itemize{
 \item The categories corresponding to the classifications to be assessed should
 be indicated in the last column of \code{matrix_evaluation} in ordinal numbers,
-where 1 indicates the most preferred group.
+where 1 is the most preferred group.
 \item Enter the same criteria parameters and limiting profiles that you used to
 obtain the classifications with PROMETHEE II.
 \item The Limiting Profiles used must be presented as rows in the
 matrix_evaluation. The name must start with the letter "r" followed by the
-profile number (e.g., "r1", "r2"). For a total of "n" categories, there
-should be "n + 1" limiting profiles.
-\item The preference function types are as follows: "linear", "v-shape", "usual",
-"u-shape", "level" and "gaussian".
+profile number (e.g., "r1", "r2"). For \code{k} categories, there
+should define \code{k + 1} limiting profiles.
+\item The types of preference function are as follows: "linear", "v-shape",
+"usual", "u-shape", "level" and "gaussian".
 \item The preference and indifference thresholds depend on the type of function
 selected. The preference threshold requires definition (is non-zero) for all
 functions except for "usual" and "u-shaped". The indifference threshold is
 non-zero for "linear", "level" and "u-shaped" functions.
-\item In the objective criterion write "max" to maximize or "min" to minimize.
-\item The sum of the weights of all the criteria must be equal to 1.
+\item In the objective write "max" to maximize or "min" to minimize.
+\item The sum of the weights of all criteria must be equal to 1.
 }
 }
 \examples{
-
+# The number of categories or groups to be evaluated is defined.
 k <- 4
 
+# The evaluation matrix is defined to evaluate 30 clients who were classified
+# into four groups according to five criteria and five limiting profiles.
+# (r1,r2,r3,r4,r5). The last column contains the categories in numerical
+# format.
 matrix_evaluation <- data.frame (
 
-Alternativess = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                  11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                  21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
                 "r1", "r2", "r3", "r4", "r5"),
@@ -90,7 +93,7 @@ Category = c(3, 3, 1, 1, 4, 3, 2, 4, 1, 3,
               1, 4, 2, 2, 2, 2, 2, 1, 3, 4,
               3, 3, 3, 2, 4, 2, 1, 4, 3, 4,
               NA, NA, NA, NA, NA))
-
+# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
  Parameter = c("Function Type", "Indifference Threshold",
                "Preference Threshold","Objetive", "Weight"),
@@ -103,7 +106,6 @@ data_criteria <- data.frame(
 ###############################
 RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 print(RS)
-#########
 }
 \references{
 Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method

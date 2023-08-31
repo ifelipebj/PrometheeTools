@@ -1,18 +1,17 @@
 #' Quality Index of Silhouette for Sorting
 #'
-#' This function computes a quality index for `SILS` (Silhouette for Sorting),
-#' which relies on PROMETHEE II net flows to assess the classifications produced
+#' This function computes the quality index for `SILS` (Silhouette for Sorting),
+#' which relies on PROMETHEE II net flows to assess the classifications generated
 #' by PROMETHEE-based ordered sorting methods.
-#' @param matrix_evaluation Matrix encompassing the values of the alternatives
-#' according to various criteria and classification. The rows represent the
-#' alternatives and the limiting profiles, the columns correspond to the
-#' evaluation criteria, and last column the classifications.
-#' @param data_criteria A matrix with the parameter information (rows) for each
-#' criterion (columns) used to obtain the classification to be evaluated. The
-#' parameters rows are in the following order: Function Type, Indifference
-#' Threshold, Preference Threshold, Objective and Weight.
+#' @param matrix_evaluation The matrix includes the values for all alternatives
+#' and limiting profiles are rows and columns correspond to the evaluation
+#' criteria. The last column indicates the alternative classification.
+#' @param data_criteria Matrix with the parameter information (rows) for each
+#' criterion (columns). The rows of parameters are in the following order:
+#' Function Type, Indifference Threshold, Preference Threshold, Objective and
+#' Weight.
 #' @param k The number of categories to be evaluated.
-#' @param SILS_plot A boolean value indicating whether to generate a stacked bar
+#' @param SILS_plot Boolean value indicating whether to generate a stacked bar
 #' chart representing the SILS values.
 #' @references
 #' Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method
@@ -21,35 +20,39 @@
 #' @details
 #' - The categories corresponding to the classifications to be assessed should
 #' be indicated in the last column of `matrix_evaluation` in ordinal numbers,
-#' where 1 indicates the most preferred group.
+#' where 1 is the most preferred group.
 #' - Enter the same criteria parameters and limiting profiles that you used to
 #' obtain the classifications with PROMETHEE II.
 #' - The Limiting Profiles used must be presented as rows in the
 #' matrix_evaluation. The name must start with the letter "r" followed by the
-#' profile number (e.g., "r1", "r2"). For a total of `k` categories, there
-#' should be `k + 1` limiting profiles.
-#' - The preference function types are as follows: "linear", "v-shape", "usual",
-#' "u-shape", "level" and "gaussian".
+#' profile number (e.g., "r1", "r2"). For `k` categories, there
+#' should define `k + 1` limiting profiles.
+#' - The types of preference function are as follows: "linear", "v-shape",
+#' "usual", "u-shape", "level" and "gaussian".
 #' - The preference and indifference thresholds depend on the type of function
 #' selected. The preference threshold requires definition (is non-zero) for all
 #' functions except for "usual" and "u-shaped". The indifference threshold is
 #' non-zero for "linear", "level" and "u-shaped" functions.
-#' - In the objective criterion write "max" to maximize or "min" to minimize.
-#' - The sum of the weights of all the criteria must be equal to 1.
+#' - In the objective write "max" to maximize or "min" to minimize.
+#' - The sum of the weights of all criteria must be equal to 1.
 #' @return
 #' - A data frame with the SILS values for each alternative according to the
 #' classification entered.
 #'
-#' - A stacked bar chart representing the SILS values for each alternative with
+#' - Stacked bar chart representing the SILS values for each alternative with
 #' horizontal control limits.
 #' @export
 #' @seealso \code{\link{PROMETHEEII}}
 #' @importFrom ggplot2 ggplot aes geom_bar scale_fill_manual theme_minimal
 #' labs geom_hline scale_x_discrete scale_y_continuous theme element_text margin
 #' @examples
-#'
+#'# The number of categories or groups to be evaluated is defined.
 #'k <- 4
 #'
+#'# The evaluation matrix is defined to evaluate 30 clients who were classified
+#'# into four groups according to five criteria and five limiting profiles.
+#'# (r1,r2,r3,r4,r5). The last column contains the categories in numerical
+#'# format.
 #' matrix_evaluation <- data.frame (
 #'
 #'Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -80,7 +83,7 @@
 #'               1, 4, 2, 2, 2, 2, 2, 1, 3, 4,
 #'               3, 3, 3, 2, 4, 2, 1, 4, 3, 4,
 #'               NA, NA, NA, NA, NA))
-#'
+#'# The matrix with the criteria parameters is defined
 #'data_criteria <- data.frame(
 #'  Parameter = c("Function Type", "Indifference Threshold",
 #'                "Preference Threshold","Objetive", "Weight"),
@@ -93,13 +96,12 @@
 #'###############################
 #'RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 #'print(RS)
-#'#########
 SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
   colnames(matrix_evaluation)[1] <- "Alternative"
   colnames(matrix_evaluation)[ncol(matrix_evaluation)] <- "Category"
   Category <- matrix_evaluation$Category[!is.na(matrix_evaluation$Category)]
   matrix_evaluation <- matrix_evaluation[, -which(names(matrix_evaluation) == "Category")]
-  #calculate PROMETHEE
+  # Calculate PROMETHEE
   RS <- PROMETHEEII(matrix_evaluation, data_criteria)
   data <- as.data.frame(RS[[1]])
   data$Phi <- as.numeric(data$Phi)
@@ -159,12 +161,12 @@ SILS <- function(matrix_evaluation, data_criteria, k, SILS_plot = FALSE) {
       h[i] <- (dissim_i + dissicentro_k) / (num_alt_cat_i + 1)
     }
   }
-  # Silhouette calculation
+  # Silhouette sorting calculation
   for (i in seq_along(phi)){
     SILS[i] <- (l[i] - u[i]) / max(l[i], u[i]) - (h[i] - u[i]) / max(h[i], u[i])
   }
   RS <- data.frame(Alternative, Category, SILS)
-  # Plop for silhouettes
+  # Plot for silhouettes
   if (SILS_plot) {
     ggplot2::ggplot()
     SILS_ggplot <- ggplot(RS, aes(x = Alternative, y = SILS, fill = ifelse(SILS > 0, "", ""))) +

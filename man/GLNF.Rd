@@ -7,36 +7,37 @@
 GLNF(matrix_evaluation, data_criteria)
 }
 \arguments{
-\item{matrix_evaluation}{A matrix that encompasses the values of the
-alternatives across various criteria, with the rows representing the
-alternatives and limiting profiles, while the columns correspond to the
-evaluation criteria.}
+\item{matrix_evaluation}{The matrix includes the values for all alternatives.
+The alternatives and limiting profiles are row and columns correspond to
+the evaluation criteria.}
 
-\item{data_criteria}{A matrix with the parameter information (rows) for each
-criterion (columns). The parameters rows are in the following order: Function
-Type, Indifference Threshold, Preference Threshold, Objective and Weight.}
+\item{data_criteria}{Matrix with the parameter information (rows) for each
+criterion (columns). The rows of parameters are in the following order:
+Function Type, Indifference Threshold, Preference Threshold, Objective and
+Weight.}
 }
 \value{
--\code{Global} A matrix with the results of the global search where the positive
-flow, the negative flow, the net flow and its preclassification are defined
-for each alternative.
+-\code{Global} Matrix with the results of the global search where positive,
+negative and net flow, and its preclassification are defined for each
+alternative.
 
--\code{Local1} Matrices with the results of the first local search, where the
-alternatives are separated according to their sign from the net flows
-obtained after applying PROMETHEE to each group formed in the global search.
+-\code{Local1} Matrices with the results of the first local search. PROMETHEE is
+applied to each group obtained in the global search. The alternatives are
+divided according to their positive or negative sign from the net flows
+obtained from PROMETHEE.
 
--\code{Local2} Matrices with the results of the second local search, where where
-the alternatives are separated according to their sign from net flows are
-obtained after applying PROMETHEE between each pair of categories.
+-\code{Local2} Matrices with the results of the second local search, where the
+alternatives are divided according to their sign from net flows are obtained
+after applying PROMETHEE between each pair of neighbour categories.
 
--\code{Class} Final classification results.
+-\code{Class} Final classification of the alternatives results.
 }
 \description{
 This function applies the GLNF Sorting (Global Local Net Flow Sorting)
-algorithm to sort the alternatives into groups ordered according to the
-decision-maker's preferences for multiple criteria. GLNF sorting is based
-on PROMETHEE net flows and a set of limiting profiles. This algorithm starts
-from a global classification (global search) that is enhanced by two
+algorithm to classify the alternatives into ordered groups according to the
+decision-maker's preferences in multiple criteria context. GLNF sorting is
+based on PROMETHEE net flows and a set of limiting profiles. This algorithm
+starts from a global classification (global search) that is enhanced by two
 local searches, intra-categorical and inter-categorical.
 }
 \details{
@@ -44,23 +45,26 @@ local searches, intra-categorical and inter-categorical.
 \item The Limiting Profiles should be presented as rows in the matrix_evaluation.
 The name must start with the letter "r" followed by the profile number
 (e.g., "r1", "r2").
-\item For a total of k categories, there should be k + 1 limiting profiles.
-Where to create k groups the set of limit profiles "r1 preferred to r2,...,
-preferred to r(k+1)" is defined.
-\item The preference function types are as follows: "linear", "v-shape", "usual",
-"u-shape", "level" and "gaussian".
+\item For k categories, there should be k + 1 limiting profiles. To create k
+groups the set of limit profiles are defined, where r1 is preferred to
+r2,...,preferred to r(k+1).
+\item The types of preference function are as follows: "linear", "v-shape",
+"usual", "u-shape", "level" and "gaussian".
 \item The preference and indifference thresholds depend on the type of function
 selected. The preference threshold requires definition (is non-zero) for all
 functions except for "usual" and "u-shaped". The indifference threshold is
 non-zero for "linear", "level" and "u-shaped" functions.
-\item In the objective criterion write "max" to maximize or "min" to minimize.
-\item The sum of the weights of all the criteria must be equal to 1.
+\item In the objective write "max" to maximize or "min" to minimize.
+\item The sum of the weights of all criteria must be equal to 1.
 }
 }
 \examples{
+# The evaluation matrix is defined to classify 30 customers in four categories
+# according to five criteria. Five limiting profiles (r1,r2,r3,r4,r5) are
+# included in the rows as alternatives.
 matrix_evaluation <- data.frame (
 
-Alternatives = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
                 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
                 21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
                 "r1", "r2", "r3", "r4", "r5"),
@@ -84,6 +88,8 @@ Length = c(4, 3, 3, 2, 2, 2, 2, 3, 2, 4,
           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
           4, 5, 1, 4, 2, 1, 5, 1, 1, 2,
           5, 4, 3, 2, 1))
+
+# The matrix with the criteria parameters is defined
 data_criteria <- data.frame(
 Parameter = c("Function Type", "Indifference Threshold",
              "Preference Threshold","Objetive", "Weight"),
@@ -95,10 +101,14 @@ Length = c("usual", 0.00, 0.00, "max", 0.1))
 
 ###############################
 RS <- GLNF(matrix_evaluation, data_criteria)
+# Final classification of the 30 customers into four ordered groups
+RS$Class
+# It is possible to check the details of global and local searches.
+# Show global classification results
 RS$Global
+# Show local classification results
 RS$Local1
 RS$Local2
-RS$Class
 }
 \references{
 Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method

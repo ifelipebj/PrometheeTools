@@ -36,6 +36,8 @@
 #' of alternatives (it has been tested with 10,000 alternatives) much higher
 #' than the previous implementations in R (`promethee123` and `PROMETHEE`).
 #' @examples
+#'# The evaluation matrix is defined to rank 30 customers according to five
+#'# criteria.
 #'matrix_evaluation <- data.frame (
 #'
 #'Alternative = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -56,6 +58,8 @@
 #'Length = c(4, 3, 3, 2, 2, 2, 2, 3, 2, 4,
 #'           3, 3, 1, 1, 2, 5, 4, 2, 2, 5,
 #'           4, 5, 1, 4, 2, 1, 5, 1, 1, 2))
+#'
+#'# The matrix with the criteria parameters is defined
 #'data_criteria <- data.frame(
 #'Parameter = c("Function Type", "Indifference Threshold",
 #'              "Preference Threshold","Objetive", "Weight"),
@@ -67,7 +71,9 @@
 #'
 #'###############################
 #'RS <- PROMETHEEII(matrix_evaluation, data_criteria)
+#'# Positive flows, negative flows and net flows
 #'RS$NF
+#'# Net flows by criteria
 #'RS$NFC
 PROMETHEEII <- function(matrix_evaluation, data_criteria) {
   # Identify columns of criteria and alternative column
