@@ -80,6 +80,5 @@ RS$NFC
 \references{
 Brans, J.P.; De Smet, Y., (2016). PROMETHEE Methods. In: Multiple Criteria
 Decision Analysis. State of the Art Surveys, Figuera, J., Greco, S.,
-Ehrgott, M.; Springer: New York, USA, pp. 187-219.
-\url{https://doi.org/10.1007/978-1-4939-3094-4_6}.
+Ehrgott, M.; Springer: New York, USA, pp. 187-219. DOI: 10.1007/978-1-4939-3094-4_6.
 }

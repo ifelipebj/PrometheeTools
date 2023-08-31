@@ -14,9 +14,9 @@
 #' @param SILS_plot Boolean value indicating whether to generate a stacked bar
 #' chart representing the SILS values.
 #' @references
-#' Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method
+#' Barrera, F., Segura, M., & Maroto, C. (2023) Online. Multicriteria sorting method
 #' based on global and local search for supplier segmentation. International
-#' Transactions in Operational Research. Online https://doi.org/10.1111/itor.13288
+#' Transactions in Operational Research. DOI:10.1111/itor.13288
 #' @details
 #' - The categories corresponding to the classifications to be assessed should
 #' be indicated in the last column of `matrix_evaluation` in ordinal numbers,

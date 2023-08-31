@@ -99,9 +99,9 @@ RS <- SILS(matrix_evaluation, data_criteria, k, SILS_plot = TRUE)
 print(RS)
 }
 \references{
-Barrera, F., Segura, M., & Maroto, C. (2023). Multicriteria sorting method
+Barrera, F., Segura, M., & Maroto, C. (2023) Online. Multicriteria sorting method
 based on global and local search for supplier segmentation. International
-Transactions in Operational Research. Online https://doi.org/10.1111/itor.13288
+Transactions in Operational Research. DOI:10.1111/itor.13288
 }
 \seealso{
 \code{\link{PROMETHEEII}}
